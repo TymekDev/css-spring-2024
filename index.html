@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="author"
+      content="Tymoteusz Makowski (TymekDev) <tymek.makowski@gmail.com>"
+    />
+    <meta
+      name="description"
+      content="A demo showcasing CSS nesting and layers."
+    />
+    <title>CSS Nesting and Layers Demo</title>
+    <style>
+      /* this thing is nested! */
+      #example {
+        @layer maybe-external-styles {
+          .bloated.example.class.that.might.be.hard.to.override {
+            color: red;
+          }
+        }
+
+        /* this takes precedence! */
+        div {
+          color: blue;
+        }
+      }
+    </style>
+    <style>
+      summary h3 {
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      pre {
+        counter-reset: line;
+        padding-left: 0.5rem;
+        overflow-y: auto;
+
+        span.line {
+          &::before {
+            border-right: 1px solid hsl(0, 0%, 50%);
+            color: hsl(0, 0%, 50%);
+            content: counter(line);
+            counter-increment: line;
+            margin-right: 0.75rem;
+            padding-right: 0.5rem;
+          }
+
+          &:nth-child(-n + 9) {
+            padding-left: 0.5rem;
+          }
+
+          &:only-child::before {
+            content: none;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Nesting and Layers Demo</h1>
+    <h2>Example</h2>
+    <section id="example">
+      <div class="bloated example class that might be hard to override">
+        This is a div with a lot of classes
+      </div>
+      <span class="bloated example class that might be hard to override"
+        >This is a span with a lot of classes</span
+      >
+      <div>This is a div with no classes</div>
+    </section>
+    <div>This is a div just outside of <code>#example</code> section</div>
+    <h2>CSS Code</h2>
+    <details open="">
+      <summary>
+        <h3>Example</h3>
+      </summary>
+      <pre
+        class="shiki github-light vp-code"
+        style="background-color: #fff; color: #24292e"
+        tabindex="0"
+      ><code><span class="line"><span style="color:#6A737D">/* this thing is nested! */</span></span>
+<span class="line"><span style="color:#6F42C1">#example</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">  @</span><span style="color:#005CC5">layer</span><span style="color:#005CC5"> maybe-external-styles</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">    .</span><span style="color:#005CC5">bloated</span><span style="color:#24292E">.</span><span style="color:#005CC5">example</span><span style="color:#24292E">.</span><span style="color:#005CC5">class</span><span style="color:#24292E">.</span><span style="color:#005CC5">that</span><span style="color:#24292E">.</span><span style="color:#005CC5">might</span><span style="color:#24292E">.</span><span style="color:#005CC5">be</span><span style="color:#24292E">.</span><span style="color:#005CC5">hard</span><span style="color:#24292E">.</span><span style="color:#005CC5">to</span><span style="color:#24292E">.</span><span style="color:#005CC5">override</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#005CC5">      color</span><span style="color:#24292E">: </span><span style="color:#005CC5">red</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  /* this takes precedence! */</span></span>
+<span class="line"><span style="color:#22863A">  div</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#005CC5">    color</span><span style="color:#24292E">: </span><span style="color:#005CC5">blue</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+    </details>
+    <details>
+      <summary>
+        <h3>Code Snippets</h3>
+      </summary>
+      <pre
+        class="shiki github-light vp-code"
+        style="background-color: #fff; color: #24292e"
+        tabindex="0"
+      ><code><span class="line"><span style="color:#22863A">summary</span><span style="color:#22863A"> h3</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#005CC5">  display</span><span style="color:#24292E">: </span><span style="color:#005CC5">inline-block</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#005CC5">  cursor</span><span style="color:#24292E">: </span><span style="color:#005CC5">pointer</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A">pre</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#005CC5">  counter-reset</span><span style="color:#24292E">: </span><span style="color:#005CC5">line</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#005CC5">  padding-left</span><span style="color:#24292E">: </span><span style="color:#005CC5">0.5</span><span style="color:#D73A49">rem</span><span style="color:#24292E">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5">  span</span><span style="color:#24292E">.</span><span style="color:#005CC5">line</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#24292E">    &amp;::before {</span></span>
+<span class="line"><span style="color:#24292E">      border-right: </span><span style="color:#005CC5">1</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> solid</span><span style="color:#005CC5"> hsl</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#D73A49">%</span><span style="color:#24292E">, </span><span style="color:#005CC5">50</span><span style="color:#D73A49">%</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#005CC5">      color</span><span style="color:#24292E">: </span><span style="color:#005CC5">hsl</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#D73A49">%</span><span style="color:#24292E">, </span><span style="color:#005CC5">50</span><span style="color:#D73A49">%</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#005CC5">      content</span><span style="color:#24292E">: </span><span style="color:#005CC5">counter</span><span style="color:#24292E">(</span><span style="color:#005CC5">line</span><span style="color:#24292E">);</span></span>
+<span class="line"><span style="color:#005CC5">      counter-increment</span><span style="color:#24292E">: </span><span style="color:#005CC5">line</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#005CC5">      margin-right</span><span style="color:#24292E">: </span><span style="color:#005CC5">0.75</span><span style="color:#D73A49">rem</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#005CC5">      padding-right</span><span style="color:#24292E">: </span><span style="color:#005CC5">0.5</span><span style="color:#D73A49">rem</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">    &amp;</span><span style="color:#6F42C1">:nth-child</span><span style="color:#24292E">(</span><span style="color:#005CC5">-n + 9</span><span style="color:#24292E">) {</span></span>
+<span class="line"><span style="color:#005CC5">      padding-left</span><span style="color:#24292E">: </span><span style="color:#005CC5">0.5</span><span style="color:#D73A49">rem</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292E">    &amp;</span><span style="color:#6F42C1">:only-child::before</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#005CC5">      content</span><span style="color:#24292E">: </span><span style="color:#005CC5">none</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"><span style="color:#24292E">  }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+    </details>
+    <footer>
+      Based on
+      <a
+        href="https://frontendmasters.com/blog/what-you-need-to-know-about-modern-css-spring-2024-edition/"
+        >What You Need to Know about Modern CSS (Spring 2024 Edition)</a
+      >
+      by
+      <a href="https://frontendmasters.com/blog/author/chriscoyier/"
+        >Chris Coyier</a
+      >.
+      <div style="margin-top: 1rem">
+        <a href="https://github.com/TymekDev/css-spring-2024">Source</a>
+      </div>
+    </footer>
+  </body>
+</html>
